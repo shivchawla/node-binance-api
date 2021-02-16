@@ -369,6 +369,10 @@ let api = function Binance( options = {} ) {
             quantity: quantity
         };
         if ( typeof flags.type !== 'undefined' ) opt.type = flags.type;
+        if (opt.type == 'MARKET' && typeof flags.quoteOrderQty !== 'undefined') {
+            opt.quoteOrderQty = flags.quoteOrderQty
+            delete opt.quantity;
+        } 
         if ( opt.type.includes( 'LIMIT' ) ) {
             opt.price = price;
             if ( opt.type !== 'LIMIT_MAKER' ) {
